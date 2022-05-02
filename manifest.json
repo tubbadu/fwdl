@@ -1,0 +1,24 @@
+{
+  "author": "igorlogius",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "fwdl@addons.mozilla.org",
+      "strict_min_version": "60.0"
+    }
+  },
+  "description": "forward download to an external application",
+  "icons": {
+  },
+  "manifest_version": 2,
+  "name": "fwdl",
+  "permissions": [
+    "nativeMessaging",
+    "downloads"
+  ],
+  "version": "0.1.0"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "fwdl",
+  "description": "run on download complete",
+  "path": "/home/???/.mozilla/native-messaging-hosts/fwdl.py",
+  "type": "stdio",
+  "allowed_extensions": [ "fwdl@addons.mozilla.org" ]
+}
