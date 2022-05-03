@@ -24,6 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Runs a set of commands using the runners shell
       - name: run build script
         run: ./README
@@ -31,8 +34,9 @@ jobs:
       - name: create release
         id: create_release
         uses: actions/create-release@latest
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{env.ARTNAME}}
           release_name: ${{env.ARTNAME}} 
