@@ -30,7 +30,7 @@ jobs:
         
       - name: create release
         id: create_release
-        uses: actions/create-release@latest
+        uses: actions/create-release@2
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
@@ -39,18 +39,18 @@ jobs:
           draft: false
           prerelease: false
           
-      - name: upload release asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@latest
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        with:
+      #- name: upload release asset
+      #  id: upload-release-asset 
+      #  uses: actions/upload-release-asset@2
+      #  env:
+      #    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      #  with:
           # pulls from CREATE RELEASE step, refs it's ID to get its outputs, which include `upload_url`.
           # ref: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          upload_url: ${{ steps.create_release.outputs.upload_url }}           
-          asset_path: ./${{env.ARTNAME}}
-          asset_name:  ${{env.ARTNAME}}
-          asset_content_type: application/zip  
+      #    upload_url: ${{ steps.create_release.outputs.upload_url }}           
+      #    asset_path: ./${{env.ARTNAME}}
+      #    asset_name:  ${{env.ARTNAME}}
+      #    asset_content_type: application/zip  
 
           
           
