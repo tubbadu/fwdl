@@ -30,9 +30,9 @@ jobs:
         
       - name: create release
         id: create_release
-        uses: actions/create-release@v2
+        uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{env.ARTNAME}}
           release_name: ${{env.ARTNAME}}
