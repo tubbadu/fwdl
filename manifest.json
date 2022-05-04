@@ -16,6 +16,7 @@
   },
   "description": "forward download to an external application",
   "icons": {
+      "128": "icon.png"
   },
   "manifest_version": 2,
   "name": "fwdl",
@@ -24,5 +25,5 @@
     "nativeMessaging",
     "downloads"
   ],
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
