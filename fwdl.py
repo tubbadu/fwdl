@@ -15,14 +15,25 @@ msg_length = struct.unpack('=I', raw_length)[0]
 msg = sys.stdin.buffer.read(msg_length).decode("utf-8")
 msg = json.loads(msg)
 
+subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 1'])
 
 url = msg['url']
 fpath = msg['filename']
+executablePath = msg['executablePath']
+arguments = msg['arguments']
+minSize = msg['minSize']
+with open("/home/tubbadu/log.txt", "w") as f:
+    f.write(str(arguments))
+subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 2', arguments])
+
+#replace '[URL]' and '[FILENAME]' in arguments
+arguments.replace('[URL]', url).replace('[FILENAME]', fpath)
+subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 3'])
 
 #do something with your file
-subprocess.run(['notify-send', '-t', '5000', 'Firefox Download requested', url])
+subprocess.run(['notify-send', '-t', '5000', 'Firefox Download requested', executablePath])
 
-subprocess.run(['your_downloader', url, fpath ])
+subprocess.run([executablePath, arguments.strip().split()])
 
 
 with open(logfile,'a') as f:
