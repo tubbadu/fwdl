@@ -5,41 +5,38 @@ import sys
 import struct
 import subprocess
 import time
+import os
 
 logfile='/tmp/fwdl.log'
 
 raw_length = sys.stdin.buffer.read(4)
 if not raw_length:
-    sys.exit(0)
+	sys.exit(0)
 msg_length = struct.unpack('=I', raw_length)[0]
 msg = sys.stdin.buffer.read(msg_length).decode("utf-8")
 msg = json.loads(msg)
 
-subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 1'])
-
-url = msg['url']
-fpath = msg['filename']
-executablePath = msg['executablePath']
-arguments = msg['arguments']
-minSize = msg['minSize']
-with open("/home/tubbadu/log.txt", "w") as f:
-    f.write(str(arguments))
-subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 2', arguments])
+url = str(msg['url'])
+fpath = str(msg['filename'])
+executablePath = str(msg['executablePath'])
+arguments = str(msg['arguments'])
+minSize = msg['minSize'] #convert to int?
+downloadDir = "/home/tubbadu/Scaricati/"
 
 #replace '[URL]' and '[FILENAME]' in arguments
-arguments.replace('[URL]', url).replace('[FILENAME]', fpath)
-subprocess.run(['notify-send', '-t', '5000', 'Firefox Download 3'])
+arguments = arguments.replace('[URL]', url).replace('[FILENAME]', fpath).strip()
+
+#change working directory to home dir
+#TODO add in option page
+os.chdir(downloadDir)
 
 #do something with your file
-subprocess.run(['notify-send', '-t', '5000', 'Firefox Download requested', executablePath])
-
-subprocess.run([executablePath, arguments.strip().split()])
-
+subprocess.run([executablePath] + arguments.split())
 
 with open(logfile,'a') as f:
-    f.write(fpath+ "\n"+
-            url+ "\n"
-    )
+	f.write(fpath+ "\n"+
+			url+ "\n"
+	)
 
 # add extended attributes to the downloaded file
 subprocess.run(['attr','-s','dl_url', '-V', url, fpath ])

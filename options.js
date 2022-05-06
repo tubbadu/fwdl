@@ -14,7 +14,17 @@ function restoreOptions(){
         console.log(`Error: ${error}`);
     }
 
-    //FIX THIS
+    browser.storage.sync.get().then(gotSuccess, gotError);
+
+    function gotError(error){
+        console.log(`Error in browser.storage.sync.get(): ${error}`);
+    }
+    function gotSuccess(item){
+        document.getElementById("executablePath").value = item.executablePath
+        document.getElementById("arguments").value = item.arguments
+        document.getElementById("minSize").value = item.minSize
+    }
+    /*
     let executablePath = browser.storage.sync.get("executablePath");
     let arguments = browser.storage.sync.get("arguments");
     let minSize = browser.storage.sync.get("minSize");
@@ -40,7 +50,7 @@ function restoreOptions(){
     }
     function minSizeError(error){
         console.log(`Error minSize: ${error}`);
-    }
+    }*/
 
 }
 
