@@ -21,14 +21,12 @@ fpath = str(msg['filename'])
 executablePath = str(msg['executablePath'])
 arguments = str(msg['arguments'])
 minSize = msg['minSize'] #convert to int?
-downloadDir = "/home/tubbadu/Scaricati/"
 
 #replace '[URL]' and '[FILENAME]' in arguments
 arguments = arguments.replace('[URL]', url).replace('[FILENAME]', fpath).strip()
 
 #change working directory to home dir
-#TODO add in option page
-os.chdir(downloadDir)
+os.chdir(os.path.dirname(fpath))
 
 #do something with your file
 subprocess.run([executablePath] + arguments.split())
@@ -47,6 +45,3 @@ subprocess.run(['attr','-s','dl_time', '-V', str(int(time.time())), fpath ])
 max_char_per_line = 50
 lb_url = '\n '.join(url[i:i + max_char_per_line] for i in range(0, len(url), max_char_per_line))
 subprocess.run(['notify-send', '-t', '5000', 'Firefox Download completed', lb_url ])
-
-# create/store a copy any downloaded file
-# subprocess.run(['cp', fpath, '/dl/_backup/'])

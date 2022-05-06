@@ -7,14 +7,14 @@
   <body>
     <header></header>
     <main>
-        <form>
+        <form style="width: 95%;">
             <label>Executable path:</label>
             <br>
             <input id="executablePath" type="text" value="path/to/executable" style="width: 90%;">
             <p>
-            <label>Arguments:</label>
+            <label>Arguments: (use <code>[URL]</code> for the file remote url and <code>[FILEPATH]</code> for the local file path)</label>
             <br>
-            <input id="arguments" type="text" value="--download --verycool" style="width: 90%;">
+            <input id="arguments" type="text" value="--download [URL]" style="width: 90%;">
             <p>
             <label>Minimum file size to interrupt the download (Mb): (don't know how to implement this):</label>
             <br>
@@ -24,7 +24,6 @@
         </form>
         
         <script src="options.js"></script>
-        
 
     </main>
     <footer></footer>
